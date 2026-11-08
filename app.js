@@ -1,14 +1,17 @@
+/*-------------------------------- Constants --------------------------------*/
+
+
 /*---------------------------- Variables (state) ----------------------------*/
 
-// Hint 4: Game variables
-let currentPlayer = 'X';
-let moveCount = 0;
-let gameOver = false;
-
+let currentPlayer = 'X'
+let gameOver = false
+let moveCount = 0
 
 /*------------------------ Cached Element References ------------------------*/
+const messageEl = document.querySelector('#message')
+const resetBtnEl = document.querySelector('#reset')
 
-// Hint 1: Select each square
+// select each square 
 const square0El = document.getElementById('0');
 const square1El = document.getElementById('1');
 const square2El = document.getElementById('2');
@@ -19,75 +22,72 @@ const square6El = document.getElementById('6');
 const square7El = document.getElementById('7');
 const square8El = document.getElementById('8');
 
-const messageEl = document.querySelector('#message');
-const resetBtnEl = document.querySelector('#reset');
+// const squareEl = document.querySelectorAll('.sqr')
 
 
 /*-------------------------------- Functions --------------------------------*/
+messageEl.textContent = `It's ${currentPlayer} turn`
 
-// Hint 6: Switch players
 function switchPlayer() {
+
     if (gameOver === false) {
         if (currentPlayer === 'X') {
-            currentPlayer = 'O';
+            currentPlayer = 'O'
         } else {
-            currentPlayer = 'X';
+            currentPlayer = 'X'
         }
-
-        messageEl.textContent = `Player ${currentPlayer}'s turn`;
+        messageEl.textContent = `It's ${currentPlayer} turn`
     }
 }
 
-// Hints 7 & 8: Check winning lines
-function checkWinner() {
+function moves() {
+    if (moveCount === 9 && gameOver === false) {
+        gameOver = true
+        messageEl.textContent = 'Game Over!!'
+    }
+}
+
+function winner() {
     if (
         (square0El.textContent === currentPlayer &&
-         square1El.textContent === currentPlayer &&
-         square2El.textContent === currentPlayer) ||
+            square1El.textContent === currentPlayer &&
+            square2El.textContent === currentPlayer) ||
 
         (square3El.textContent === currentPlayer &&
-         square4El.textContent === currentPlayer &&
-         square5El.textContent === currentPlayer) ||
+            square4El.textContent === currentPlayer &&
+            square5El.textContent === currentPlayer) ||
 
         (square6El.textContent === currentPlayer &&
-         square7El.textContent === currentPlayer &&
-         square8El.textContent === currentPlayer) ||
+            square7El.textContent === currentPlayer &&
+            square8El.textContent === currentPlayer) ||
 
         (square0El.textContent === currentPlayer &&
-         square3El.textContent === currentPlayer &&
-         square6El.textContent === currentPlayer) ||
+            square3El.textContent === currentPlayer &&
+            square6El.textContent === currentPlayer) ||
 
         (square1El.textContent === currentPlayer &&
-         square4El.textContent === currentPlayer &&
-         square7El.textContent === currentPlayer) ||
+            square4El.textContent === currentPlayer &&
+            square7El.textContent === currentPlayer) ||
 
         (square2El.textContent === currentPlayer &&
-         square5El.textContent === currentPlayer &&
-         square8El.textContent === currentPlayer) ||
+            square5El.textContent === currentPlayer &&
+            square8El.textContent === currentPlayer) ||
 
         (square0El.textContent === currentPlayer &&
-         square4El.textContent === currentPlayer &&
-         square8El.textContent === currentPlayer) ||
+            square4El.textContent === currentPlayer &&
+            square8El.textContent === currentPlayer) ||
 
         (square2El.textContent === currentPlayer &&
-         square4El.textContent === currentPlayer &&
-         square6El.textContent === currentPlayer)
-    ) {
-        gameOver = true;
+            square4El.textContent === currentPlayer &&
+            square6El.textContent === currentPlayer)
+    ) { 
+        gameOver = true 
         messageEl.textContent = `Player ${currentPlayer} wins!`;
     }
-}
+} 
 
-// Hint 9: Check for a tie
-function checkTie() {
-    if (moveCount === 9 && gameOver === false) {
-        gameOver = true;
-        messageEl.textContent = 'It is a tie!';
-    }
-}
-
-// Hint 11: Reset the game
 function resetGame() {
+
     square0El.textContent = '';
     square1El.textContent = '';
     square2El.textContent = '';
@@ -108,107 +108,88 @@ function resetGame() {
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-// Hints 2, 5 & 10: First square
-square0El.addEventListener('click', function() {
+square0El.addEventListener('click', () => {
     if (square0El.textContent === '' && gameOver === false) {
         square0El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        moveCount++
+        winner()
+        switchPlayer()
+        moves()
     }
-});
+})
 
-// Hint 3: Second square
-square1El.addEventListener('click', function() {
+square1El.addEventListener('click', () => {
     if (square1El.textContent === '' && gameOver === false) {
         square1El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
-
-// Hint 3: Third square
-square2El.addEventListener('click', function() {
+})
+square2El.addEventListener('click', () => {
     if (square2El.textContent === '' && gameOver === false) {
         square2El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
-
-// Hint 3: Fourth square
-square3El.addEventListener('click', function() {
+})
+square3El.addEventListener('click', () => {
     if (square3El.textContent === '' && gameOver === false) {
         square3El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
-
-// Hint 3: Fifth square
-square4El.addEventListener('click', function() {
+})
+square4El.addEventListener('click', () => {
     if (square4El.textContent === '' && gameOver === false) {
         square4El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
-
-// Hint 3: Sixth square
-square5El.addEventListener('click', function() {
+})
+square5El.addEventListener('click', () => {
     if (square5El.textContent === '' && gameOver === false) {
         square5El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
-
-// Hint 3: Seventh square
-square6El.addEventListener('click', function() {
+})
+square6El.addEventListener('click', () => {
     if (square6El.textContent === '' && gameOver === false) {
         square6El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
-
-// Hint 3: Eighth square
-square7El.addEventListener('click', function() {
+})
+square7El.addEventListener('click', () => {
     if (square7El.textContent === '' && gameOver === false) {
         square7El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
-
-// Hint 3: Ninth square
-square8El.addEventListener('click', function() {
+})
+square8El.addEventListener('click', () => {
     if (square8El.textContent === '' && gameOver === false) {
         square8El.textContent = currentPlayer;
-        moveCount++;
-        checkWinner();
-        checkTie();
-        switchPlayer();
+        winner()
+        moveCount++
+        switchPlayer()
+        moves()
     }
-});
+})
 
-// Hint 11: Reset button
 resetBtnEl.addEventListener('click', resetGame);
-
-// Start the game
-resetGame();
+resetGame()
